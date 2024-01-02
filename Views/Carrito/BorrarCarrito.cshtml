@@ -1,0 +1,24 @@
+﻿@model CteTarea8MVC.Models.ItemCarrito
+
+@{
+    ViewData["Title"] = "Borrar Carrito";
+}
+
+<h1>Borrar Carrito</h1>
+
+@if (TempData["ErrCarritoBorrar"]!=null &&  ! String.IsNullOrEmpty(TempData["ErrCarritoBorrar"].ToString() ))
+{
+    
+    <div class="alert alert-danger" role="alert">
+        @Html.Raw(TempData["ErrCarritoBorrar"])
+    </div>
+} 
+else
+{
+    
+    <form asp-action="BorrarCarrito">
+        <h3>¿ Está seguro de querer borrar completamente ?</h3>
+        <input type="submit" value="Si" class="btn btn-danger" /> |
+        <a class="btn btn-secondary" asp-action="Index">No</a>
+    </form>
+}

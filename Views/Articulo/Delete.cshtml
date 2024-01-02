@@ -1,0 +1,89 @@
+﻿@model CteTarea8MVC.Models.Articulo
+
+@if (TempData["TempData"] != null && !String.IsNullOrEmpty(TempData["TempData"].ToString()))
+{
+    <div class="alert alert-danger" role="alert">
+        @Html.Raw(TempData["TempData"])
+    </div>
+}
+
+<div>
+    <h4>Articulo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FotoUrl)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FotoUrl)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Extension)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Extension)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PathRelativo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PathRelativo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PathCompleto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PathCompleto)
+        </dd>
+    </dl>
+  
+
+    
+</div>
+<div class="container">
+    
+    <!-- Modal -->
+    <div id="myModal" class="modal show" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form asp-action="Delete">
+                        <h3>¿Esta seguro de querer eliminar.?</h3>
+                        <input type="submit" value="Si" class="btn btn-danger" /> |
+                        
+                        <a asp-action="Index" class="btn btn-outline-secondary">No</a>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+
+
+</div>
+
+

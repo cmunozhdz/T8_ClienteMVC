@@ -1,0 +1,108 @@
+﻿@model CteTarea8MVC.Models.ItemCarrito
+
+@{
+    ViewData["Title"] = "Asignar Articulo al carrito.";
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+        
+    <h1>Articulo del carrito</h1>
+    </div>
+    <div class="col-md-4">
+    <a asp-action="Index">Volver al carrito</a>
+    </div>
+</div>
+
+<hr />
+<div class="row">
+    <div class="container">
+        <form asp-action="Edit">
+            
+            @if (TempData["TextData"] != null && !String.Equals(TempData["TextData"], ""))
+            {
+                 
+                <div class="alert alert-danger" role="alert">
+
+                    @Html.Raw(TempData["TextData"])
+                </div>
+            }
+
+            <div class="form-group col-md-6">
+                <label asp-for="IdArticulo" class="control-label"></label>
+                
+                    <input asp-for="IdArticulo" class="form-control" readonly />
+                
+                
+                <span asp-validation-for="IdArticulo" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" readonly />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="Cantidad" class="control-label"></label>
+                
+                <input asp-for="Cantidad" class="form-control" step="1" id="Cantidad" type="number" />
+                
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="Precio" class="control-label"></label>
+                
+                <input asp-for="Precio" class="form-control" readonly />
+                
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group col-md-6">
+                <label asp-for="SFoto" class="control-label"></label>
+                <img src="@Html.Raw(Model.SFoto)" alt="Foto" class="img-fluid img-thumbnail" />
+                
+                
+
+                <span asp-validation-for="SFoto" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="Subtotal" class="control-label"></label>
+                <input asp-for="Subtotal" class="form-control" readonly />
+                <span asp-validation-for="Subtotal" class="text-danger"></span>
+            </div>
+            
+            @if ((TempData["TextData"]==null) )
+            {
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+            }
+            else
+            {
+
+                
+                if (!TempData["TextData"].ToString().StartsWith("Error") )
+                {
+                    <div class="form-group">
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                    </div>
+                }
+            }
+        </form>
+    </div>
+</div>
+
+
+<script type="text/javascript" >
+    function SetValueTxt (IdCtrl, value) {
+       const elem = document.getElementById(IdCtrl);
+        var val = parseInt(elem.value);
+        val = val + value;
+        if (val>0) {
+            elem.value = val;
+        }
+        else {
+            elem.value = 1;
+        }
+    } 
+</script>

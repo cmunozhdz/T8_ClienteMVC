@@ -1,0 +1,87 @@
+﻿@model IEnumerable<CteTarea8MVC.Models.Articulo>
+@{
+    var data = TempData["TextData"];
+}
+@using (Html.BeginForm("Index", "Articulo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <h1>Articulos</h1>
+    <table class="table table-responsive">
+        <tr>
+            <td><a asp-action="Create" asp-route-id="0">Articulo Nuevo</a></td>
+                <td>
+                    <label for="Busqueda">Producto:</label>
+                
+                    <input type="text" id="Busqueda"  name="Busqueda" asp-for="@data" placeholder="Indica el nombre del producto a buscar." class="form-control" />
+                        
+    
+                 
+            </td>
+            <td><input type="submit" name="Buscar" value="Buscar .." class="btn btn-primary" /></td>
+            </tr>
+    </table>
+
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                
+                @Html.DisplayNameFor(model => model.FotoUrl)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() ==0)
+            {
+            <tr><td colspan="6">
+                   No Existen datos.
+                </td>
+            </tr>
+        }
+
+        @foreach (var item in Model)
+        {
+            
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+                <td>
+                        <img src=" @Html.DisplayFor(modelItem => item.FotoUrl) " class="img-fluid img-thumbnail" style="max-width:200px; max-height:200px;"     />
+                </td>
+                    <td>
+                        @Html.ActionLink("Agregar al Carrito", "Edit", "Carrito", new { id = item.Id }) |
+                        @Html.ActionLink("Editar", "Create", new { id = item.Id  }) |
+                        
+
+                <a href="Carrito/Create" ></a>
+                @Html.ActionLink("Eliminar", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+}

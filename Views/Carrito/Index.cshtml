@@ -1,0 +1,100 @@
+﻿@model IEnumerable<CteTarea8MVC.Models.ItemCarrito>
+@{
+    var data = TempData["TextData"];
+    double TotalCarrito = 0;
+}
+
+
+
+<p>
+   <h1>Carrito de compras</h1> 
+    <a asp-action="CarritoNuevo">Crear Carrito</a>
+    <a asp-action="BorrarCarrito">Borrar Carrito</a>
+    @Html.ActionLink("Agregar Articulo", "Index", "Articulo", new {  })
+    
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model._IdCarrito)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdArticulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SFoto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subtotal)
+            </th>
+
+            <th>
+
+                
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @foreach (var item in Model)
+        {
+            TotalCarrito = TotalCarrito + item.Subtotal;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item._IdCarrito)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdArticulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td align="right">
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td align="right">
+                    
+                    @Html.Raw(string.Format("{0:###,###.00}", item.Precio))
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.Archivo) " class="img-fluid img-thumbnail" style="max-width:200px; max-height:200px;" />
+                </td>
+                <td align="right">
+                    
+                    @Html.Raw(string.Format("{0:###,###.00}", item.Subtotal))
+                </td>
+
+                <td>
+                    @if( item._IdCarrito !=0 )
+                    {
+                        @Html.ActionLink("Editar", "Edit", new { id = item.IdArticulo } )
+                        
+                    }|
+                   
+                    
+                    @if (item._IdCarrito != 0)
+                    {
+                        @Html.ActionLink("Eliminar artículo", "Delete", new { id = item.IdArticulo })
+                    }
+
+                </td>
+            </tr>
+
+        }
+        <tr>
+            <td colspan="7" align="right">  @Html.Raw("<strong>Total:" +String.Format("{0:C}", TotalCarrito) + "</strong>")</td>
+        </tr>
+    </tbody>
+</table>
