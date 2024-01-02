@@ -80,7 +80,11 @@ namespace CteTarea8MVC.Controllers
 
         }
 
-
+        /// <summary>
+        /// Consulta los datos del catalogo , 
+        /// </summary>
+        /// <param name="collection">Busqueda:Indica el nombre del articulo a buscar.</param>
+        /// <returns></returns>
         [HttpPost]// GET: ArticuloController
         public async Task<IActionResult> Index(IFormCollection collection)
         {
