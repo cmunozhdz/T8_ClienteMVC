@@ -99,8 +99,6 @@ namespace CteTarea8MVC.Controllers
 
             RestApiClient _restApiClient = new RestApiClient("https://t8-2020630308-af.azurewebsites.net/api/");
             string result = await _restApiClient.PostAsync("FnArticulos?code=V0fPd9QsaLaU5epyDXtO209PmPezQmJhZTV_fB8ajMSgAzFutldQjw==&Busqueda=" + Busqueda , "{}");
-            //Correcion del json para validar una lista.
-
             if (result != null && !result.StartsWith("["))
             {
                 _mArt = new();
