@@ -139,33 +139,39 @@ namespace CteTarea8MVC.Controllers
         public async Task<IActionResult> Create(int id)
         {
             //Valida si el articulo existe.
-            if (id!=0)
+            try
             {
-                //El producto es nuevo
-                //https://t8-2020630308-af.azurewebsites.net/api/FnGetArticulo?code=lrfCjESazk1KEbdD5rzAcPOto5IGcuGPQcuaasEQ8TmLAzFuYJoefg==
-                RestApiClient _restApiClient = new RestApiClient("https://t8-2020630308-af.azurewebsites.net/api/");
-                String EndPoint = "FnGetArticulo?code=lrfCjESazk1KEbdD5rzAcPOto5IGcuGPQcuaasEQ8TmLAzFuYJoefg==&Id=" + id;
-                String result = await _restApiClient.PostAsync(EndPoint, "{}");
+                if (id != 0)
+                {
+                    //El producto es nuevo
+                    //https://t8-2020630308-af.azurewebsites.net/api/FnGetArticulo?code=lrfCjESazk1KEbdD5rzAcPOto5IGcuGPQcuaasEQ8TmLAzFuYJoefg==
+                    RestApiClient _restApiClient = new RestApiClient("https://t8-2020630308-af.azurewebsites.net/api/");
+                    String EndPoint = "FnGetArticulo?code=lrfCjESazk1KEbdD5rzAcPOto5IGcuGPQcuaasEQ8TmLAzFuYJoefg==&Id=" + id;
+                    String result = await _restApiClient.PostAsync(EndPoint, "{}");
 
-                if (result != null && result.StartsWith("Error"))
-                {
-                    return BadRequest();
+                    if (result != null && result.StartsWith("Error"))
+                    {
+                        TempData["TempData"] = result;
+                    }
+                    else
+                    {
+                        TempData["TempData"] = "";
+                        Articulo _Art = JsonConvert.DeserializeObject<Articulo>(result);
+                        ViewData.Model = _Art;
+
+
+                    }
+
                 }
-                else
-                {
-                    Articulo _Art = JsonConvert.DeserializeObject<Articulo>(result);
-                    ViewData.Model = _Art;
-                    
-                    return View();
-                }
-                
+
             }
-            else
+            catch (Exception e)
             {
-                return View();
+                TempData["TempData"] = e.ToString();
             }
 
-            
+            return View();
+
         }
 
         // POST: ArticuloController/Create

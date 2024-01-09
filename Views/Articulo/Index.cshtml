@@ -5,6 +5,12 @@
 @using (Html.BeginForm("Index", "Articulo", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <h1>Articulos</h1>
+    @if (TempData["TempData"] != null && !String.IsNullOrEmpty(TempData["TempData"].ToString()))
+    {
+        <div class="alert alert-danger" role="alert">
+            @Html.Raw(TempData["TempData"])
+        </div>
+    }
     <table class="table table-responsive">
         <tr>
             <td><a asp-action="Create" asp-route-id="0">Articulo Nuevo</a></td>
