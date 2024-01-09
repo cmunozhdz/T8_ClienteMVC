@@ -219,11 +219,6 @@ namespace CteTarea8MVC.Controllers
                             String _FullPath = Path.Combine(_Path, file.FileName);
                             String _UrlPath = "/Files/" + file.FileName;
                             
-                            
-
-                            
-                            
-                            
                             using (var Stream = new FileStream(_FullPath, FileMode.Create))
                             {
                                 //Creamos el archivo en el servidor.
