@@ -52,7 +52,8 @@ namespace CteTarea8MVC.Controllers
             //String UrlServicio = "https://t8-2020630308-af.azurewebsites.net/api/FnArticulos?code=V0fPd9QsaLaU5epyDXtO209PmPezQmJhZTV_fB8ajMSgAzFutldQjw==&Busqueda="; //+ Descripcion;
             RestApiClient _restApiClient = new RestApiClient("https://t8-2020630308-af.azurewebsites.net/api/");
             string result = await _restApiClient.PostAsync("FnArticulos?code=V0fPd9QsaLaU5epyDXtO209PmPezQmJhZTV_fB8ajMSgAzFutldQjw==&Busqueda=", "{}");
-            if (result!=null && !result.StartsWith("[{"))
+            //Hacemos la correcion para detectar que el json trae una lista.
+            if (result!=null && !result.StartsWith("["))
                 {
                     _mArt = new();
                     _mArt.Id = 0;
